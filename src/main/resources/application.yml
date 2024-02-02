@@ -1,0 +1,7 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-hrguqy7uaxs3ha33.us.auth0.com/
+          audiences: appFive
