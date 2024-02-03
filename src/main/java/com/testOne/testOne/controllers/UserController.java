@@ -38,4 +38,40 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error");
         }
     }
+
+    @GetMapping(path = "addinvite")
+    public ResponseEntity<String> addInvite(){
+        try{
+            userService.addInvites();
+            return ResponseEntity.ok().body("All good");
+        }
+        catch (Exception e){
+            //TODO:This nees to be atomized
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
+
+    @GetMapping(path = "sendInvites")
+    public ResponseEntity<String> sendInvites(){
+        try{
+            userService.sendInvites();
+            return ResponseEntity.ok().body("All good");
+        }
+        catch (Exception e){
+            //TODO:This nees to be atomized
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
+
+    @GetMapping(path = "getscores")
+    public ResponseEntity<String> getScores(){
+        try{
+            userService.printScores();
+            return ResponseEntity.ok().body("All good");
+        }
+        catch (Exception e){
+            //TODO:This nees to be atomized
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
 }

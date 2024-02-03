@@ -2,6 +2,9 @@ package com.testOne.testOne.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table()
 public class User {
@@ -14,15 +17,20 @@ public class User {
     private String email;
 
     @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "profile_picture_id"
-    )
+    @JoinColumn(name = "profile_picture_id")
     private ProfilePicture profilePicture;
 
-    public User(String name, String email, ProfilePicture profilePicture) {
+    @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "theUser")
+    private List<Envites> theInviteList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Score> theScoreList = new ArrayList<>();
+
+    public User(String name, String email, ProfilePicture profilePicture , List<Envites> theInvite) {
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.theInviteList = theInvite;
     }
 
     public User() {
@@ -59,5 +67,25 @@ public class User {
 
     public void setProfilePicture(ProfilePicture profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public List<Envites> getTheInviteList() {
+        return theInviteList;
+    }
+
+    public void setTheInviteList(List<Envites> theInviteList) {
+        this.theInviteList = theInviteList;
+    }
+
+    public void addInvite(Envites inviteIn){
+        this.theInviteList.add(inviteIn);
+    }
+
+    public List<Score> getTheScoreList() {
+        return theScoreList;
+    }
+
+    public void setTheScoreList(List<Score> theScoreList) {
+        this.theScoreList = theScoreList;
     }
 }
